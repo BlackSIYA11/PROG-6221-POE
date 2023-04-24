@@ -65,52 +65,69 @@ class Recipe
 
     public void ScaleRecipe(double factor)
     {
-        for (int i = 1; i < quantities.Length; i++)
+        for (int i = 0; i < quantities.Length; i++)
         {
             quantities[i] *= factor;
         }
     }
+
     public void ResetQuantities()
     {
         for (int i = 0; i < quantities.Length; i++)
         {
-            quantities[i] = originalQuantities[i];
+            quantities[i] = 0;
         }
     }
 
-    public void ClearData()
+    public void ClearRecipe()
     {
         ingredients = new string[ingredients.Length];
         quantities = new double[quantities.Length];
         units = new string[units.Length];
         steps = new string[steps.Length];
+        Console.WriteLine("Recipe cleared.");
     }
 }
 
 class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
-        Console.WriteLine("Enter the number of ingredients:");
+        // prompt the user to enter recipe details
+        Console.Write("Enter the number of ingredients: ");
         int numIngredients = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("Enter the number of steps:");
-        int numSteps = int.Parse(Console.ReadLine());
 
-        Recipe myrecipe = new Recipe(numIngredients, numSteps);
+        Console.Write("Enter the number of steps: ");
+        int numSteps = Convert.ToInt32(Console.ReadLine());
 
-        myrecipe.Ingredients();
-        myrecipe.Steps();
-        myrecipe.DisplayRecipe();
+        Recipe recipe = new Recipe(numIngredients, numSteps);
+        recipe.EnterIngredients();
+        recipe.EnterSteps();
+        recipe.DisplayRecipe();
 
-        Console.WriteLine("\nEnter scaling factor (0.5, 2, or 3):");
-        double factor = Convert.ToDouble(Console.ReadLine());
-        myrecipe.ScaleRecipe(factor);
-        myrecipe.DisplayRecipe();
+        // Prompt the user for scaling or resetting the quantities
+        while (true)
+        {
+            Console.Write("Enter 's' to scale the recipe, 'r' to reset the quantities, or 'c' to clear the recipe and start over: ");
+            string input = Console.ReadLine();
 
-
-        myrecipe.ResetQuantities();
-        myrecipe.DisplayRecipe();
-
-        myrecipe.ClearData();
+            if (input == "s")
+            {
+                Console.Write("Enter scaling factor (0.5, 2, or 3): ");
+                double factor = double.Parse(Console.ReadLine());
+                recipe.ScaleRecipe(factor);
+                recipe.DisplayRecipe();
+            }
+            else if (input == "r")
+            {
+                recipe.ResetQuantities();
+                recipe.DisplayRecipe();
+            }
+            else if (input == "c")
+            {
+                recipe.ClearRecipe();
+                break;
+            }
+        }
     }
 }
