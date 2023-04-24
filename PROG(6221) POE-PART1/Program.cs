@@ -2,59 +2,66 @@
 
 class Recipe
 {
-    // Declaring variables arrays
     private string[] ingredients;
     private double[] quantities;
-    private double[] originalQuantities;
     private string[] units;
     private string[] steps;
 
     public Recipe(int numIngredients, int numSteps)
     {
+        // initialize the arrays
         ingredients = new string[numIngredients];
         quantities = new double[numIngredients];
-        originalQuantities = new double[numIngredients];
         units = new string[numIngredients];
         steps = new string[numSteps];
     }
 
-    public void Ingredients()
+    public void EnterIngredients()
     {
+        // Enter ingridients details
         for (int i = 0; i < ingredients.Length; i++)
         {
-            Console.WriteLine("Enter ingredient #{0}", i + 1);
+            Console.WriteLine($"Enter details for ingredient {i + 1}:");
+            Console.Write("Name of Ingridient: ");
             ingredients[i] = Console.ReadLine();
-            Console.WriteLine("Enter quantity for {0}", ingredients[i]);
+            Console.Write("Quantity of ingridient: ");
             quantities[i] = Convert.ToDouble(Console.ReadLine());
-            originalQuantities[i] = quantities[i];
-            Console.WriteLine("Enter unit of measurement for {0}", ingredients[i]);
+            Console.Write("Unit of measurement: ");
             units[i] = Console.ReadLine();
         }
     }
 
-    public void Steps()
+    public void EnterSteps()
     {
+        Console.Write("Enter the number of steps: ");
+        int numSteps = Convert.ToInt32(Console.ReadLine());
+
+        // get recipe steps
         for (int i = 0; i < steps.Length; i++)
         {
-            Console.WriteLine("Enter step #{0}", i + 1);
+            Console.Write($"Enter step {i + 1}: ");
             steps[i] = Console.ReadLine();
         }
     }
-
-    public void DisplayRecipe()
+  public void DisplayRecipe()
     {
-        Console.WriteLine("Ingredients:");
+        Console.WriteLine("Recipe:");
+        Console.WriteLine("--------");
+
         for (int i = 0; i < ingredients.Length; i++)
         {
-            Console.WriteLine("{0} {1} {2}", quantities[i], units[i], ingredients[i]);
+            Console.WriteLine($"{quantities[i]} {units[i]} {ingredients[i]}");
         }
+        Console.WriteLine();
 
-        Console.WriteLine("\nSteps:");
         for (int i = 0; i < steps.Length; i++)
         {
-            Console.WriteLine("{0}. {1}", i + 1, steps[i]);
+            Console.WriteLine($"{i + 1}. {steps[i]}");
         }
+
+        Console.WriteLine();
     }
+
 
     public void ScaleRecipe(double factor)
     {
