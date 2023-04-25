@@ -33,9 +33,6 @@ class Recipe
 
     public void EnterSteps()
     {
-        Console.Write("Enter the number of steps: ");
-        int numSteps = Convert.ToInt32(Console.ReadLine());
-
         // get recipe steps
         for (int i = 0; i < steps.Length; i++)
         {
@@ -53,7 +50,9 @@ class Recipe
             Console.WriteLine($"{quantities[i]} {units[i]} {ingredients[i]}");
         }
         Console.WriteLine();
-
+        
+        Console.WriteLine("Steps");
+        Console.WriteLine("--------");
         for (int i = 0; i < steps.Length; i++)
         {
             Console.WriteLine($"{i + 1}. {steps[i]}");
@@ -63,7 +62,7 @@ class Recipe
     }
 
 
-    public void ScaleRecipe(double factor)
+     public void ScaleRecipe(double factor)
     {
         for (int i = 0; i < quantities.Length; i++)
         {
@@ -75,7 +74,7 @@ class Recipe
     {
         for (int i = 0; i < quantities.Length; i++)
         {
-            quantities[i] /= 2;
+            quantities[i] = 1.0;
         }
     }
 
@@ -85,7 +84,7 @@ class Recipe
         quantities = new double[quantities.Length];
         units = new string[units.Length];
         steps = new string[steps.Length];
-        Console.WriteLine("Recipe cleared.");
+        Console.WriteLine("Recipe has been cleared.");
     }
 }
 
