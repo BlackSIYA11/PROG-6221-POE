@@ -6,6 +6,7 @@ class Recipe
     private double[] quantities;
     private string[] units;
     private string[] steps;
+    
     public Recipe(int numIngredients, int numSteps)
     {
         // initialize the arrays
@@ -18,6 +19,7 @@ class Recipe
     public void EnterIngredients()
     {
         Console.WriteLine("WELCOME TO MY APPLICATION");
+        Console.WriteLine("*************************");
         // Enter ingridients details
         for (int i = 0; i < ingredients.Length; i++)
         {
@@ -77,7 +79,7 @@ class Recipe
     {
         for (int i = 0; i < quantities.Length; i++)
         {
-            quantities[i] /= 2;
+            quantities[i] = 2;
         }
     }
 
@@ -112,12 +114,11 @@ class Program
         recipe.EnterSteps();
         recipe.DisplayRecipe();
 
-        // Prompt the user for scaling or resetting the quantities
         while (true)
         {
-            Console.Write("Enter 's' to scale the recipe, 'r' to reset the quantities, 'c' to clear the recipe and start over ,  or if 'q' quit the application : ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("Enter 's' to scale the recipe, 'r' to reset the quantities, 'c' to clear the recipe and start over, or if 'q' quit the application: ");
             string input = Console.ReadLine();
-           
 
             if (input == "s")
             {
@@ -133,14 +134,44 @@ class Program
             }
             else if (input == "c")
             {
-                
                 recipe.ClearRecipe();
+
+                Console.Write("Enter the number of ingredients for the new recipe: ");
+                numIngredients = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("Enter the number of steps for the new recipe: ");
+                numSteps = Convert.ToInt32(Console.ReadLine());
+
+                recipe = new Recipe(numIngredients, numSteps);
                 recipe.EnterIngredients();
                 recipe.EnterSteps();
                 recipe.DisplayRecipe();
-                break;
+
+                while (true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("Enter 's' to scale the recipe, 'r' to reset the quantities, or 'q' to quit the application: ");
+                    input = Console.ReadLine();
+
+                    if (input == "s")
+                    {
+                        Console.Write("Enter scaling factor (0.5, 2, or 3): ");
+                        double factor = Convert.ToDouble(Console.ReadLine());
+                        recipe.ScaleRecipe(factor);
+                        recipe.DisplayRecipe();
+                    }
+                    else if (input == "r")
+                    {
+                        recipe.ResetQuantities();
+                        recipe.DisplayRecipe();
+                    }
+                    else if (input == "q")
+                    {
+                        break;
+                    }
+                }
             }
-            if (input == "q")
+            else if (input == "q")
             {
                 break;
             }
