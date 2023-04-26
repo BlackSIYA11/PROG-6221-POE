@@ -17,6 +17,7 @@ class Recipe
 
     public void EnterIngredients()
     {
+        Console.WriteLine("WELCOME TO MY APPLICATION");
         // Enter ingridients details
         for (int i = 0; i < ingredients.Length; i++)
         {
@@ -95,6 +96,9 @@ class Program
 {
     public static void Main(string[] args)
     {
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.BackgroundColor = ConsoleColor.Black;
+        Console.WriteLine("WELCOME TO MY APPLICATION");
         Console.ForegroundColor = ConsoleColor.Yellow;
         // prompt the user to enter recipe details
         Console.Write("Enter the number of ingredients: ");
