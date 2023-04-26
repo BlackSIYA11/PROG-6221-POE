@@ -77,7 +77,7 @@ class Recipe
     {
         for (int i = 0; i < quantities.Length; i++)
         {
-            quantities[i] = 1.0;
+            quantities[i] /= 2;
         }
     }
 
