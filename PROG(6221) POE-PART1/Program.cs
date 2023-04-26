@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 class Recipe
 {
@@ -6,7 +6,6 @@ class Recipe
     private double[] quantities;
     private string[] units;
     private string[] steps;
-
     public Recipe(int numIngredients, int numSteps)
     {
         // initialize the arrays
@@ -21,10 +20,11 @@ class Recipe
         // Enter ingridients details
         for (int i = 0; i < ingredients.Length; i++)
         {
-            Console.WriteLine($"Enter details for ingredient {i + 1}:");
-            Console.Write("Name of Ingridient: ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Enter details for ingredient #{i + 1}:");
+            Console.Write("Name of Ingredient: ");
             ingredients[i] = Console.ReadLine();
-            Console.Write("Quantity of ingridient: ");
+            Console.Write("Quantity of ingredient: ");
             quantities[i] = Convert.ToDouble(Console.ReadLine());
             Console.Write("Unit of measurement: ");
             units[i] = Console.ReadLine();
@@ -33,6 +33,7 @@ class Recipe
 
     public void EnterSteps()
     {
+        Console.ForegroundColor = ConsoleColor.Blue;
         // get recipe steps
         for (int i = 0; i < steps.Length; i++)
         {
@@ -40,8 +41,9 @@ class Recipe
             steps[i] = Console.ReadLine();
         }
     }
-  public void DisplayRecipe()
+    public void DisplayRecipe()
     {
+        Console.ForegroundColor= ConsoleColor.DarkGreen;
         Console.WriteLine("Recipe:");
         Console.WriteLine("--------");
 
@@ -50,7 +52,7 @@ class Recipe
             Console.WriteLine($"{quantities[i]} {units[i]} {ingredients[i]}");
         }
         Console.WriteLine();
-        
+
         Console.WriteLine("Steps");
         Console.WriteLine("--------");
         for (int i = 0; i < steps.Length; i++)
@@ -62,7 +64,7 @@ class Recipe
     }
 
 
-     public void ScaleRecipe(double factor)
+    public void ScaleRecipe(double factor)
     {
         for (int i = 0; i < quantities.Length; i++)
         {
@@ -78,13 +80,14 @@ class Recipe
         }
     }
 
+
     public void ClearRecipe()
     {
         ingredients = new string[ingredients.Length];
         quantities = new double[quantities.Length];
         units = new string[units.Length];
         steps = new string[steps.Length];
-        Console.WriteLine("Recipe has been cleared.");
+        Console.WriteLine("Recipe  has been cleared.");
     }
 }
 
@@ -92,6 +95,7 @@ class Program
 {
     public static void Main(string[] args)
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         // prompt the user to enter recipe details
         Console.Write("Enter the number of ingredients: ");
         int numIngredients = Convert.ToInt32(Console.ReadLine());
@@ -107,8 +111,9 @@ class Program
         // Prompt the user for scaling or resetting the quantities
         while (true)
         {
-            Console.Write("Enter 's' to scale the recipe, 'r' to reset the quantities, or 'c' to clear the recipe and start over: ");
+            Console.Write("Enter 's' to scale the recipe, 'r' to reset the quantities, 'c' to clear the recipe and start over ,  or if 'q' quit the application : ");
             string input = Console.ReadLine();
+           
 
             if (input == "s")
             {
@@ -124,7 +129,15 @@ class Program
             }
             else if (input == "c")
             {
+                
                 recipe.ClearRecipe();
+                recipe.EnterIngredients();
+                recipe.EnterSteps();
+                recipe.DisplayRecipe();
+                break;
+            }
+            if (input == "q")
+            {
                 break;
             }
         }
