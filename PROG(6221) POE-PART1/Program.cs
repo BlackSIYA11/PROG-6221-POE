@@ -6,7 +6,9 @@ class Recipe
     private double[] quantities;
     private string[] units;
     private string[] steps;
-    
+
+    private double[] originalQuantities;
+
     public Recipe(int numIngredients, int numSteps)
     {
         // initialize the arrays
@@ -14,6 +16,9 @@ class Recipe
         quantities = new double[numIngredients];
         units = new string[numIngredients];
         steps = new string[numSteps];
+
+        // initialize the originalQuantities array
+        originalQuantities = new double[numIngredients];
     }
 
     public void EnterIngredients()
@@ -29,6 +34,7 @@ class Recipe
             ingredients[i] = Console.ReadLine();
             Console.Write("Quantity of ingredient: ");
             quantities[i] = Convert.ToDouble(Console.ReadLine());
+            originalQuantities[i] = quantities[i]; // store original quantities
             Console.Write("Unit of measurement: ");
             units[i] = Console.ReadLine();
         }
@@ -44,9 +50,10 @@ class Recipe
             steps[i] = Console.ReadLine();
         }
     }
+
     public void DisplayRecipe()
     {
-        Console.ForegroundColor= ConsoleColor.DarkGreen;
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("Recipe:");
         Console.WriteLine("--------");
 
@@ -66,12 +73,11 @@ class Recipe
         Console.WriteLine();
     }
 
-
     public void ScaleRecipe(double factor)
     {
         for (int i = 0; i < quantities.Length; i++)
         {
-            quantities[i] *= factor;
+            quantities[i] = originalQuantities[i] * factor;
         }
     }
 
@@ -79,10 +85,9 @@ class Recipe
     {
         for (int i = 0; i < quantities.Length; i++)
         {
-            quantities[i] = 2;
+            quantities[i] = originalQuantities[i];
         }
     }
-
 
     public void ClearRecipe()
     {
@@ -90,9 +95,12 @@ class Recipe
         quantities = new double[quantities.Length];
         units = new string[units.Length];
         steps = new string[steps.Length];
-        Console.WriteLine("Recipe  has been cleared.");
+        originalQuantities = new double[originalQuantities.Length];
+
+        Console.WriteLine("Recipe has been cleared.");
     }
 }
+
 
 class Program
 {
