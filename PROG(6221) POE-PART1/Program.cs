@@ -183,6 +183,7 @@ class Program
             }
             else if (input == "q")
             {
+                Console.WriteLine("GOODBYE!!!");
                 break;
             }
         }
