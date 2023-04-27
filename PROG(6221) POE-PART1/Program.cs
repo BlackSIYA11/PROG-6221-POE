@@ -42,7 +42,8 @@ class Recipe
 
     public void EnterSteps()
     {
-        Console.ForegroundColor = ConsoleColor.Blue;
+        
+        int numSteps = Convert.ToInt32(Console.ReadLine());
         // get recipe steps
         for (int i = 0; i < steps.Length; i++)
         {
@@ -109,6 +110,7 @@ class Program
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.BackgroundColor = ConsoleColor.Black;
         Console.WriteLine("WELCOME TO MY APPLICATION");
+        Console.WriteLine("-------------------------");
         Console.ForegroundColor = ConsoleColor.Yellow;
         // prompt the user to enter recipe details
         Console.Write("Enter the number of ingredients: ");
@@ -186,4 +188,3 @@ class Program
         }
     }
 }
-
