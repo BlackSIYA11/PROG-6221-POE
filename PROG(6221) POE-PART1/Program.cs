@@ -29,7 +29,7 @@ class Recipe
         // Enter ingridients details
         for (int i = 0; i < ingredients.Length; i++)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine($"Enter details for ingredient #{i + 1}:");
             Console.Write("Name of Ingredient: ");
             ingredients[i] = Console.ReadLine();
@@ -43,8 +43,6 @@ class Recipe
 
     public void EnterSteps()
     {
-        
-        int numSteps = Convert.ToInt32(Console.ReadLine());
         // get recipe steps
         for (int i = 0; i < steps.Length; i++)
         {
@@ -55,7 +53,7 @@ class Recipe
 
     public void DisplayRecipe()
     {
-        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Recipe:");
         Console.WriteLine("--------");
 
@@ -178,6 +176,7 @@ class Program
                     }
                     else if (input == "q")
                     {
+                        Console.WriteLine("GOODBYE!!");
                         break;
                     }
                 }
