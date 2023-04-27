@@ -2,6 +2,7 @@ using System;
 
 class Recipe
 {
+    // Declaring the variables
     private string[] ingredients;
     private double[] quantities;
     private string[] units;
