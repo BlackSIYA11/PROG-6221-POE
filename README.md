@@ -17,3 +17,6 @@ The application will then ask you if you want to reset the quantities back to or
 If your option is 'r' it will reset the quantities and display the recipe again ,else if your option is 'c' the recipe will be cleared shown by a message which says recipe cleared and then it will ask you to enter a new recipe with the ingredients and steps.
 After that you will have the option to scale and reset the quantities of the new recipe.
 If your option is 'q' the application will quit and then further ask you if you want to quit again if you choose 'q' a message will be displayed saying Goodbye!!
+
+Link to the github repository
+https://github.com/BlackSIYA11/PROG-6221-POE-PART1
