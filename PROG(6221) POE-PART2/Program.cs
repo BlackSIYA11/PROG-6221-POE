@@ -1,13 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 class Recipe
 {
     private string name;
+    private List<Ingredient> originalIngredients;
     private List<Ingredient> ingredients;
     private List<string> steps;
+
     public Recipe()
     {
+        originalIngredients = new List<Ingredient>();
         ingredients = new List<Ingredient>();
         steps = new List<string>();
     }
@@ -27,18 +30,7 @@ class Recipe
     {
         get { return steps; }
     }
-    public double TotalCalories
-    {
-        get
-        {
-            double totalCalories = 0;
-            foreach (Ingredient ingredient in ingredients)
-            {
-                totalCalories += ingredient.Calories;
-            }
-            return totalCalories;
-        }
-    }
+
     public void EnterIngredients()
     {
         Console.WriteLine("Enter ingredients (enter 'done' to finish)");
@@ -63,12 +55,13 @@ class Recipe
             Console.Write("Calories: ");
             ingredient.Calories = Convert.ToDouble(Console.ReadLine());
 
-            Console.Write("Enter the food group:(Starchy foods,Vegetables and fruits,Dry beans, peas, lentils and soya,Chicken, fish, meat and eggs,Milk and dairy products,Fats and oil, and Water) ");
+            Console.Write("Enter the food group:");
             ingredient.FoodGroup = Console.ReadLine();
 
             ingredients.Add(ingredient);
         }
     }
+
     public void EnterSteps()
     {
         Console.WriteLine("Enter steps (enter 'done' to finish)");
@@ -80,9 +73,11 @@ class Recipe
             if (step.ToLower() == "done")
                 break;
 
+            
             steps.Add(step);
         }
     }
+
     public void DisplayRecipe()
     {
         Console.WriteLine("Recipe: " + name);
@@ -101,20 +96,68 @@ class Recipe
         }
         Console.WriteLine();
 
-        Console.WriteLine("Total Calories: " + TotalCalories);
+        double totalCalories = CalculateTotalCalories();
+        Console.WriteLine("Total Calories: " + totalCalories);
 
-        if (TotalCalories > 300)
+        if (totalCalories > 300)
         {
-            Console.WriteLine("Warning: Total calories exceed 300!!!!");
+            Console.WriteLine("Warning: Total calories exceed 300!");
         }
         Console.WriteLine();
     }
-    public void CaloriesNotification(double totalCalories)
+
+    public double CalculateTotalCalories()
     {
-        if (totalCalories > 300)
-            Console.WriteLine("Warning: Total calories exceed 300!");
+        double totalCalories = 0;
+        foreach (Ingredient ingredient in ingredients)
+        {
+            totalCalories += ingredient.Calories;
+        }
+        return totalCalories;
+    }
+
+    public void ScaleRecipe(double factor)
+    {
+        foreach (Ingredient ingredient in ingredients)
+        {
+            ingredient.Quantity *= factor;
+        }
+    }
+
+    public void ResetQuantities()
+    {
+        for (int i = 0; i < ingredients.Count; i++)
+        {
+            ingredients[i].Quantity = originalIngredients[i].Quantity;
+        }
+    }
+
+    public void ClearRecipe()
+    {
+        ingredients.Clear();
+        steps.Clear();
+
+        foreach (Ingredient ingredient in originalIngredients)
+        {
+            ingredients.Add(new Ingredient
+            {
+                Name = ingredient.Name,
+                Quantity = ingredient.Quantity,
+                UnitOfMeasurement = ingredient.UnitOfMeasurement,
+                Calories = ingredient.Calories,
+                FoodGroup = ingredient.FoodGroup
+            });
+        }
+
+        foreach (string step in Steps)
+        {
+            steps.Add(step);
+        }
+
+        Console.WriteLine("Recipe has been cleared.");
     }
 }
+
 class Ingredient
 {
     public string Name { get; set; }
@@ -168,6 +211,37 @@ class Program
             Recipe selectedRecipe = recipes[recipeNumber - 1];
             Console.WriteLine();
             selectedRecipe.DisplayRecipe();
+
+            while (true)
+            {
+                Console.WriteLine("Enter 's' to scale the recipe, 'r' to reset the quantities, 'c' to clear the recipe and start over, or 'q' to quit the application: ");
+                string input = Console.ReadLine();
+
+                if (input == "s")
+                {
+                    Console.Write("Enter scaling factor (0.5, 2, or 3): ");
+                    double factor = Convert.ToDouble(Console.ReadLine());
+                    selectedRecipe.ScaleRecipe(factor);
+                    selectedRecipe.DisplayRecipe();
+                }
+                else if (input == "r")
+                {
+                    selectedRecipe.ResetQuantities();
+                    selectedRecipe.DisplayRecipe();
+                }
+                else if (input == "c")
+                {
+                    selectedRecipe.ClearRecipe();
+                    selectedRecipe.EnterIngredients();
+                    selectedRecipe.EnterSteps();
+                    selectedRecipe.DisplayRecipe();
+                }
+                else if (input == "q")
+                {
+                    Console.WriteLine("GOODBYE!!");
+                    break;
+                }
+            }
         }
         else
         {
@@ -175,4 +249,3 @@ class Program
         }
     }
 }
-
