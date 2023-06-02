@@ -31,6 +31,7 @@ class Recipe
         get { return steps; }
     }
 
+
     public void EnterIngredients()
     {
         Console.WriteLine("Enter ingredients (enter 'done' to finish)");
@@ -59,8 +60,17 @@ class Recipe
             ingredient.FoodGroup = Console.ReadLine();
 
             ingredients.Add(ingredient);
+            originalIngredients.Add(new Ingredient
+            {
+                Name = ingredient.Name,
+                Quantity = ingredient.Quantity,
+                UnitOfMeasurement = ingredient.UnitOfMeasurement,
+                Calories = ingredient.Calories,
+                FoodGroup = ingredient.FoodGroup
+            });
         }
     }
+
 
     public void EnterSteps()
     {
@@ -136,26 +146,19 @@ class Recipe
     {
         ingredients.Clear();
         steps.Clear();
-
-        foreach (Ingredient ingredient in originalIngredients)
-        {
-            ingredients.Add(new Ingredient
-            {
-                Name = ingredient.Name,
-                Quantity = ingredient.Quantity,
-                UnitOfMeasurement = ingredient.UnitOfMeasurement,
-                Calories = ingredient.Calories,
-                FoodGroup = ingredient.FoodGroup
-            });
-        }
-
-        foreach (string step in Steps)
-        {
-            steps.Add(step);
-        }
+        originalIngredients.Clear(); // Clear the list of original ingredients
 
         Console.WriteLine("Recipe has been cleared.");
+
+        Console.WriteLine("Enter recipe details");
+
+        Console.Write("Name of Recipe: ");
+        name = Console.ReadLine();
+
+        EnterIngredients();
+        EnterSteps();
     }
+
 }
 
 class Ingredient
@@ -195,7 +198,7 @@ class Program
                 break;
         }
 
-        recipes.Sort((r1, r2) => r1.Name.CompareTo(r2.Name));
+        recipes.Sort((r1, r2) => r1.Name.CompareTo(r2.Name)); // Using the sort function to sort the recipe names and display them in alphabetical order
 
         Console.WriteLine("All Recipes:");
         for (int i = 0; i < recipes.Count; i++)
@@ -232,20 +235,32 @@ class Program
                 else if (input == "c")
                 {
                     selectedRecipe.ClearRecipe();
-                    selectedRecipe.EnterIngredients();
-                    selectedRecipe.EnterSteps();
-                    selectedRecipe.DisplayRecipe();
+                    recipes.Sort((r1, r2) => r1.Name.CompareTo(r2.Name));
+                    Console.WriteLine("All Recipes:");
+                    for (int i = 0; i < recipes.Count; i++)
+                    {
+                        Console.WriteLine($"Recipe #{i + 1}: {recipes[i].Name}");
+                    }
+                    Console.WriteLine("Enter the recipe number to display: ");
+                    recipeNumber = Convert.ToInt32(Console.ReadLine());
+                    if (recipeNumber > 0 && recipeNumber <= recipes.Count)
+                    {
+                        selectedRecipe = recipes[recipeNumber - 1];
+                        Console.WriteLine();
+                        selectedRecipe.DisplayRecipe();
+                    }
+                   else if (input == "q")
+                    {
+                        Console.WriteLine("GOODBYE!!");
+                        break;
+                    }
                 }
-                else if (input == "q")
+                else
                 {
-                    Console.WriteLine("GOODBYE!!");
-                    break;
+                    Console.WriteLine("Invalid recipe number!");
                 }
             }
-        }
-        else
-        {
-            Console.WriteLine("Invalid recipe number!");
+
         }
     }
 }
