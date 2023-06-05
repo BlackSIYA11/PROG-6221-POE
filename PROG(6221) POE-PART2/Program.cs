@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 class Recipe
 {
+    // Using a delegate to store the recipe class
     private string name;
     private List<Ingredient> originalIngredients;
     private List<Ingredient> ingredients;
@@ -34,9 +35,11 @@ class Recipe
 
     public void EnterIngredients()
     {
+        Console.ForegroundColor= ConsoleColor.White;
         Console.WriteLine("Enter ingredients (enter 'done' to finish)");
         while (true)
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("Enter ingredient details:");
 
             Ingredient ingredient = new Ingredient();
@@ -74,6 +77,7 @@ class Recipe
 
     public void EnterSteps()
     {
+        Console.ForegroundColor= ConsoleColor.White;
         Console.WriteLine("Enter steps (enter 'done' to finish)");
         while (true)
         {
@@ -83,13 +87,14 @@ class Recipe
             if (step.ToLower() == "done")
                 break;
 
-            
+
             steps.Add(step);
         }
     }
 
     public void DisplayRecipe()
     {
+        Console.ForegroundColor= ConsoleColor.Blue;
         Console.WriteLine("Recipe: " + name);
         Console.WriteLine("--------");
 
@@ -100,6 +105,7 @@ class Recipe
         Console.WriteLine();
 
         Console.WriteLine("Steps:");
+        Console.WriteLine("--------");
         for (int i = 0; i < steps.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {steps[i]}");
@@ -108,14 +114,18 @@ class Recipe
 
         double totalCalories = CalculateTotalCalories();
         Console.WriteLine("Total Calories: " + totalCalories);
+        Console.WriteLine("The amount of Calories should be less than 300 for each recipe");
 
         if (totalCalories > 300)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Warning: Total calories exceed 300!");
+            Ingredient ingredientWithMaxCalories = GetIngredientWithMaxCalories();
+            Console.WriteLine($"Ingredient with highest calories: {ingredientWithMaxCalories.Name} ({ingredientWithMaxCalories.Calories} calories)");
         }
         Console.WriteLine();
     }
-
+    // Calculate the total amount of calories in every ingredient for a recipe
     public double CalculateTotalCalories()
     {
         double totalCalories = 0;
@@ -124,6 +134,23 @@ class Recipe
             totalCalories += ingredient.Calories;
         }
         return totalCalories;
+    }
+    // Get the ingredient with the highest number of calories
+    public Ingredient GetIngredientWithMaxCalories()
+    {
+        Ingredient ingredientWithMaxCalories = null;
+        double maxCalories = 0;
+
+        foreach (Ingredient ingredient in ingredients)
+        {
+            if (ingredient.Calories > maxCalories)
+            {
+                maxCalories = ingredient.Calories;
+                ingredientWithMaxCalories = ingredient;
+            }
+        }
+
+        return ingredientWithMaxCalories;
     }
 
     public void ScaleRecipe(double factor)
@@ -160,7 +187,6 @@ class Recipe
     }
 
 }
-
 class Ingredient
 {
     public string Name { get; set; }
@@ -169,15 +195,17 @@ class Ingredient
     public double Calories { get; set; }
     public string FoodGroup { get; set; }
 }
-
 class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
+        Console.BackgroundColor= ConsoleColor.Black;
+        Console.ForegroundColor = ConsoleColor.DarkBlue;
         List<Recipe> recipes = new List<Recipe>();
 
         while (true)
         {
+            Console.ForegroundColor= ConsoleColor.DarkYellow;
             Console.WriteLine("Enter recipe details");
             Recipe recipe = new Recipe();
 
@@ -188,7 +216,7 @@ class Program
             recipe.EnterSteps();
 
             recipes.Add(recipe);
-
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Recipe has been added!");
 
             Console.WriteLine("Do you want to add another recipe? (y/n)");
@@ -198,9 +226,11 @@ class Program
                 break;
         }
 
-        recipes.Sort((r1, r2) => r1.Name.CompareTo(r2.Name)); // Using the sort function to sort the recipe names and display them in alphabetical order
-
+        // Using the sort function to sort the recipe names and display them in alphabetical order
+        recipes.Sort((r1, r2) => r1.Name.CompareTo(r2.Name));
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("All Recipes:");
+        Console.WriteLine("------------");
         for (int i = 0; i < recipes.Count; i++)
         {
             Console.WriteLine($"Recipe #{i + 1}: {recipes[i].Name}");
@@ -217,6 +247,7 @@ class Program
 
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("Enter 's' to scale the recipe, 'r' to reset the quantities, 'c' to clear the recipe and start over, or 'q' to quit the application: ");
                 string input = Console.ReadLine();
 
@@ -249,17 +280,23 @@ class Program
                         Console.WriteLine();
                         selectedRecipe.DisplayRecipe();
                     }
-                   else if (input == "q")
+                    else
                     {
-                        Console.WriteLine("GOODBYE!!");
+                        Console.WriteLine("Invalid Option!!!");
                         break;
                     }
                 }
-                else
+                if (input == "q")
                 {
-                    Console.WriteLine("Invalid recipe number!");
+                    Console.WriteLine("GOODBYE!!");
+                    break;
                 }
             }
+
+        }
+        else
+        {
+            Console.WriteLine("Invalid Option!!!!");
 
         }
     }
