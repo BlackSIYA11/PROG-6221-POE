@@ -1,0 +1,144 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Brendon\\source\\repos\\PROG(6221) POE-PART2\\CalorieCalculation Unit Test\\CalorieCalculation Unit Test.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Brendon\\source\\repos\\PROG(6221) POE-PART2\\CalorieCalculation Unit Test\\CalorieCalculation Unit Test.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Brendon\\source\\repos\\PROG(6221) POE-PART2\\CalorieCalculation Unit Test\\CalorieCalculation Unit Test.csproj",
+        "projectName": "CalorieCalculation Unit Test",
+        "projectPath": "C:\\Users\\Brendon\\source\\repos\\PROG(6221) POE-PART2\\CalorieCalculation Unit Test\\CalorieCalculation Unit Test.csproj",
+        "packagesPath": "C:\\Users\\Brendon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Brendon\\source\\repos\\PROG(6221) POE-PART2\\CalorieCalculation Unit Test\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Brendon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Brendon\\source\\repos\\PROG(6221) POE-PART2\\PROG(6221) POE-PART2\\PROG(6221) POE-PART2.csproj": {
+                "projectPath": "C:\\Users\\Brendon\\source\\repos\\PROG(6221) POE-PART2\\PROG(6221) POE-PART2\\PROG(6221) POE-PART2.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.1.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
+            },
+            "NUnit.Analyzers": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.2.1, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Brendon\\source\\repos\\PROG(6221) POE-PART2\\PROG(6221) POE-PART2\\PROG(6221) POE-PART2.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Brendon\\source\\repos\\PROG(6221) POE-PART2\\PROG(6221) POE-PART2\\PROG(6221) POE-PART2.csproj",
+        "projectName": "PROG(6221) POE-PART2",
+        "projectPath": "C:\\Users\\Brendon\\source\\repos\\PROG(6221) POE-PART2\\PROG(6221) POE-PART2\\PROG(6221) POE-PART2.csproj",
+        "packagesPath": "C:\\Users\\Brendon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Brendon\\source\\repos\\PROG(6221) POE-PART2\\PROG(6221) POE-PART2\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Brendon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
