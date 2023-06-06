@@ -1,4 +1,4 @@
-PROG-6221-POE-PART2
+**PROG-6221-POE-PART2**
 How to run the application
 
 The application will display a welcome message once you begin to run it followed by the question enter the recipe details which include the name,quantity,unit of measurements,food group and number of calories.
