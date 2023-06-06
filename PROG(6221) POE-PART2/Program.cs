@@ -81,6 +81,7 @@ class Recipe
         Console.WriteLine("Enter steps (enter 'done' to finish)");
         while (true)
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write("Enter step: ");
             string step = Console.ReadLine();
 
@@ -228,7 +229,7 @@ class Program
 
         // Using the sort function to sort the recipe names and display them in alphabetical order
         recipes.Sort((r1, r2) => r1.Name.CompareTo(r2.Name));
-        Console.ForegroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("All Recipes:");
         Console.WriteLine("------------");
         for (int i = 0; i < recipes.Count; i++)
