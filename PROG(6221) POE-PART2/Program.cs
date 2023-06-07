@@ -88,7 +88,6 @@ class Recipe
             if (step.ToLower() == "done")
                 break;
 
-
             steps.Add(step);
         }
     }
@@ -98,7 +97,8 @@ class Recipe
         Console.ForegroundColor= ConsoleColor.Blue;
         Console.WriteLine("Recipe: " + name);
         Console.WriteLine("--------");
-
+        Console.WriteLine("Ingredients:");
+        Console.WriteLine("-----------");
         foreach (Ingredient ingredient in ingredients)
         {
             Console.WriteLine($"{ingredient.Quantity} {ingredient.UnitOfMeasurement} {ingredient.Name}");
@@ -203,6 +203,8 @@ class Program
         Console.BackgroundColor= ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.DarkBlue;
         List<Recipe> recipes = new List<Recipe>();
+        Console.WriteLine("WELCOME TO MY APPLICATION");
+        Console.WriteLine("-------------------------");
 
         while (true)
         {
