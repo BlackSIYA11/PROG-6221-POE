@@ -1,17 +1,3 @@
-**PROG-6221-POE-PART2**
-How to run the application
-
-The application will display a welcome message once you begin to run it followed by the question enter the recipe details which include the name,quantity,unit of measurements,food group and number of calories.
-Once you enter done for entering the ingredients under the enter **NAME statement** it will then ask you to enter the steps for that recipe and once you press done for the steps under enter the **STEP statement** .
-A message will then be displayed showing that your recipe has been added.
-A statement will be asked if you want to enter a new recipe. If not then the recipes will be displayed in alphabetical order.A question will be asked to which recipe you want to display you enter the number for recipe available in which then you can see the steps and ingredients.
-With the recipe chosen you are then able to scale it, reset the quantities as well as clear that recipe and start a new one which will then be added.
-If you choose the q statement the program will end.
-
-
-
-
-
 # PROG-6221-POE-PART1
 How to run the application
 
