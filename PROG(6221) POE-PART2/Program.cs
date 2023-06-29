@@ -4,6 +4,9 @@ using System.Collections.Generic;
 class Recipe
 {
     // Using a delegate to store the recipe class
+    public delegate void CaloriesExceededHandler(Recipe recipe);
+    public event CaloriesExceededHandler CaloriesExceeded;
+
     private string name;
     private List<Ingredient> originalIngredients;
     private List<Ingredient> ingredients;
@@ -32,10 +35,9 @@ class Recipe
         get { return steps; }
     }
 
-
     public void EnterIngredients()
     {
-        Console.ForegroundColor= ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Enter ingredients (enter 'done' to finish)");
         while (true)
         {
@@ -74,10 +76,9 @@ class Recipe
         }
     }
 
-
     public void EnterSteps()
     {
-        Console.ForegroundColor= ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Enter steps (enter 'done' to finish)");
         while (true)
         {
@@ -92,9 +93,18 @@ class Recipe
         }
     }
 
+    // Event handler method for calories exceeded event
+    protected virtual void OnCaloriesExceeded()
+    {
+        if (CaloriesExceeded != null)
+        {
+            CaloriesExceeded(this); // Raise the event
+        }
+    }
+
     public void DisplayRecipe()
     {
-        Console.ForegroundColor= ConsoleColor.Blue;
+        Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine("Recipe: " + name);
         Console.WriteLine("--------");
         Console.WriteLine("Ingredients:");
@@ -126,6 +136,7 @@ class Recipe
         }
         Console.WriteLine();
     }
+
     // Calculate the total amount of calories in every ingredient for a recipe
     public double CalculateTotalCalories()
     {
@@ -136,6 +147,7 @@ class Recipe
         }
         return totalCalories;
     }
+
     // Get the ingredient with the highest number of calories
     public Ingredient GetIngredientWithMaxCalories()
     {
@@ -186,8 +198,8 @@ class Recipe
         EnterIngredients();
         EnterSteps();
     }
-
 }
+
 class Ingredient
 {
     public string Name { get; set; }
@@ -196,11 +208,14 @@ class Ingredient
     public double Calories { get; set; }
     public string FoodGroup { get; set; }
 }
+
 class Program
 {
     public static void Main(string[] args)
     {
-        Console.BackgroundColor= ConsoleColor.Black;
+
+
+        Console.BackgroundColor = ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.DarkBlue;
         List<Recipe> recipes = new List<Recipe>();
         Console.WriteLine("WELCOME TO MY APPLICATION");
@@ -208,12 +223,15 @@ class Program
 
         while (true)
         {
-            Console.ForegroundColor= ConsoleColor.DarkYellow;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Enter recipe details");
             Recipe recipe = new Recipe();
 
             Console.Write("Name of Recipe: ");
             recipe.Name = Console.ReadLine();
+
+            // Subscribe to the CaloriesExceeded event
+            recipe.CaloriesExceeded += Recipe_CaloriesExceeded;
 
             recipe.EnterIngredients();
             recipe.EnterSteps();
@@ -300,7 +318,13 @@ class Program
         else
         {
             Console.WriteLine("Invalid Option!!!!");
-
         }
+    }
+
+    // Event handler for the CaloriesExceeded event
+    private static void Recipe_CaloriesExceeded(Recipe recipe)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine($"Warning: Calories in recipe '{recipe.Name}' exceed 300!");
     }
 }
