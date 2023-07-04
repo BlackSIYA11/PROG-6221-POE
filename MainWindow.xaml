@@ -1,0 +1,128 @@
+﻿<Window x:Class="RecipeApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:RecipeApp"
+        Title="Recipe App" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Label Content="Name of Recipe:"/>
+            <TextBox x:Name="recipeNameTextBox" Width="200" Margin="5"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Margin="10">
+                <Label Content="Ingredients:" FontWeight="Bold"/>
+                <ListBox x:Name="ingredientsListBox" Width="200" Margin="5"/>
+                <Button Content="Add Ingredient" Click="AddIngredientButton_Click" Margin="5"/>
+
+                <StackPanel x:Name="ingredientDetailsPanel" Visibility="Collapsed">
+                    <StackPanel>
+                        <Label Content="Name:" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Enter ingredient name:" Width="150"/>
+                            <TextBox x:Name="ingredientNameTextBox" Width="150" Margin="5"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <Label Content="Quantity:" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Enter quantity:" Width="150"/>
+                            <TextBox x:Name="ingredientQuantityTextBox" Width="150" Margin="5"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <Label Content="Unit of Measurement:" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Enter unit of measurement:" Width="150"/>
+                            <TextBox x:Name="ingredientUnitTextBox" Width="150" Margin="5"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <Label Content="Calories:" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Enter calories:" Width="150"/>
+                            <TextBox x:Name="ingredientCaloriesTextBox" Width="150" Margin="5"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <Label Content="Food Group:" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Enter food group:" Width="150"/>
+                            <TextBox x:Name="ingredientFoodGroupTextBox" Width="150" Margin="5"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Button Content="Save Ingredient" Click="SaveIngredientButton_Click" Margin="5"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="10">
+                <Label Content="Steps:" FontWeight="Bold"/>
+                <ListBox x:Name="stepsListBox" Margin="5"/>
+                <Button Content="Add Step" Click="AddStepButton_Click" Margin="5"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Margin="10">
+                <Label Content="Total Calories:" FontWeight="Bold"/>
+                <TextBlock x:Name="totalCaloriesTextBlock"/>
+                <Label Content="Max Calories Ingredient:" FontWeight="Bold"/>
+                <TextBlock x:Name="maxCaloriesIngredientTextBlock"/>
+                <Button Content="Clear Recipe" Click="ClearRecipeButton_Click" Margin="5"/>
+                <Button Content="Scale Recipe" Click="ScaleRecipeButton_Click" Margin="5"/>
+                <Button Content="Reset Quantity" Click="ResetQuantityButton_Click" Margin="5"/>
+                <StackPanel Margin="5">
+                    <Label Content="Filter by Ingredient:" FontWeight="Bold"/>
+                    <TextBox x:Name="filterIngredientTextBox" Width="150" Margin="5"/>
+                    <Button Content="Filter" Click="FilterByIngredientButton_Click" Margin="5"/>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <Label Content="Filter by Food Group:" FontWeight="Bold"/>
+                    <TextBox x:Name="filterFoodGroupTextBox" Width="150" Margin="5"/>
+                    <Button Content="Filter" Click="FilterByFoodGroupButton_Click" Margin="5"/>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <Label Content="Filter by Calories:" FontWeight="Bold"/>
+                    <TextBox x:Name="filterCaloriesTextBox" Width="150" Margin="5"/>
+                    <Button Content="Filter" Click="FilterByCaloriesButton_Click" Margin="5"/>
+                </StackPanel>
+                <Button Content="Exit Application" Click="ExitApplicationButton_Click" Margin="5"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Margin="10">
+                <Label Content="Recipes:" FontWeight="Bold"/>
+                <ListBox x:Name="recipesListBox" Width="200" Margin="5" SelectionChanged="RecipesListBox_SelectionChanged"/>
+                <Button Content="Add Recipe" Click="AddRecipeButton_Click" Margin="5"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="10">
+                <Label Content="Recipe:" FontWeight="Bold"/>
+                <TextBox x:Name="recipeTextBox" TextWrapping="Wrap" AcceptsReturn="True" Height="200"/>
+                <Button Content="Delete Recipe" Click="DeleteRecipeButton_Click" Margin="5"/>
+                <Button Content="Update Recipe" Click="UpdateRecipeButton_Click" Margin="5"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
