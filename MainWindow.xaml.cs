@@ -24,19 +24,25 @@ namespace RecipeApp
         {
             recipesListBox.Items.Clear();
             List<Recipe> sortedRecipes = recipeManager.GetRecipesSortedByName();
+
             foreach (Recipe recipe in sortedRecipes)
             {
-                recipesListBox.Items.Add(recipe.Name);
+                // Get the recipe information as a list of strings
+                List<string> recipeInfo = GetRecipeInfoAsString(recipe);
+
+                // Join the recipe information into a single string
+                string recipeInfoString = string.Join(Environment.NewLine, recipeInfo);
+
+                recipesListBox.Items.Add(recipeInfoString);
             }
         }
-
-
         private void AddRecipeButton_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(recipeNameTextBox.Text))
             {
-                recipe.Name = recipeNameTextBox.Text;
-                recipeManager.AddRecipe(recipe);
+                Recipe newRecipe = new Recipe();
+                newRecipe.Name = recipeNameTextBox.Text;
+                recipeManager.AddRecipe(newRecipe); // Add the new recipe to the recipe manager
                 UpdateRecipeList();
                 ClearRecipeButton_Click(sender, e);
             }
@@ -47,7 +53,7 @@ namespace RecipeApp
         }
         private void AddIngredientButton_Click(object sender, RoutedEventArgs e)
         {
-            ingredientDetailsPanel.Visibility = Visibility.Visible;
+            
             IngredientDialog dialog = new IngredientDialog();
             if (dialog.ShowDialog() == true)
             {
@@ -57,34 +63,7 @@ namespace RecipeApp
                 UpdateCalories();
             }
         }
-        private void SaveIngredientButton_Click(object sender, RoutedEventArgs e)
-        {
-            string name = ingredientNameTextBox.Text;
-            string quantity = ingredientQuantityTextBox.Text;
-            string unit = ingredientUnitTextBox.Text;
-            string calories = ingredientCaloriesTextBox.Text;
-            string foodGroup = ingredientFoodGroupTextBox.Text;
-
-            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(quantity) || string.IsNullOrEmpty(unit) ||
-                string.IsNullOrEmpty(calories) || string.IsNullOrEmpty(foodGroup))
-            {
-                MessageBox.Show("Please enter all the ingredient information.", "Missing Information", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else
-            {
-                // Save the ingredient details or perform any other necessary actions
-                // Clear the text boxes and hide the ingredient details panel
-                ingredientNameTextBox.Text = string.Empty;
-                ingredientQuantityTextBox.Text = string.Empty;
-                ingredientUnitTextBox.Text = string.Empty;
-                ingredientCaloriesTextBox.Text = string.Empty;
-                ingredientFoodGroupTextBox.Text = string.Empty;
-                ingredientDetailsPanel.Visibility = Visibility.Collapsed;
-
-                // Add the ingredient to the ingredientsListBox or perform any other necessary actions
-            }
-        }
-
+        
         private void AddStepButton_Click(object sender, RoutedEventArgs e)
         {
             StepDialog dialog = new StepDialog();
@@ -115,9 +94,6 @@ namespace RecipeApp
 
         private void ClearRecipeButton_Click(object sender, RoutedEventArgs e)
         {
-            // Store the current recipe
-            string currentRecipe = GetRecipeAsString();
-
             // Clear the recipe
             recipe.ClearRecipe();
             recipeNameTextBox.Text = "";
@@ -125,32 +101,31 @@ namespace RecipeApp
             stepsListBox.Items.Clear();
             totalCaloriesTextBlock.Text = "";
             maxCaloriesIngredientTextBlock.Text = "";
-            recipeTextBox.Text = "";
-
-            // Add the current recipe to the list of recipes
-            recipes.Add(currentRecipe);
-
-            // Sort the recipes in alphabetical order
-            recipes.Sort();
-
-            // Clear the recipesListBox before displaying the recipes
-            recipesListBox.Items.Clear();
-
-            // Add each recipe to the recipesListBox
-            foreach (string recipe in recipes)
-            {
-                recipesListBox.Items.Add(recipe);
-            }
+           
         }
 
-        private string GetRecipeAsString()
+        private List<string> GetRecipeInfoAsString(Recipe recipe)
         {
-            // Convert the recipe information to a string representation
-            string recipeName = recipeNameTextBox.Text;
-            string ingredients = string.Join(", ", ingredientsListBox.Items.Cast<string>());
-            string steps = string.Join("\n", stepsListBox.Items.Cast<string>());
+            List<string> recipeInfo = new List<string>();
 
-            return $"Recipe Name: {recipeName}\nIngredients: \n{ingredients} \nSteps: \n{steps}";
+            string recipeName = recipe.Name;
+
+            recipeInfo.Add(recipeName);
+            recipeInfo.Add("Ingredients:");
+            foreach (Ingredient ingredient in recipe.Ingredients)
+            {
+                string ingredientInfo = $"{ingredient.Name} ({ingredient.Quantity} {ingredient.UnitOfMeasurement})";
+                recipeInfo.Add(ingredientInfo);
+            }
+
+            recipeInfo.Add("Steps:");
+            for (int i = 0; i < recipe.Steps.Count; i++)
+            {
+                string stepInfo = $"{i + 1}. {recipe.Steps[i]}";
+                recipeInfo.Add(stepInfo);
+            }
+
+            return recipeInfo;
         }
 
         private void ScaleRecipeButton_Click(object sender, RoutedEventArgs e)
@@ -196,6 +171,7 @@ namespace RecipeApp
 
             UpdateIngredientsList(); // Update the displayed ingredient list after resetting quantities
         }
+
         private void ExitApplicationButton_Click(object sender, RoutedEventArgs e)
         {
             // Prompt the user to confirm the exit
@@ -212,16 +188,12 @@ namespace RecipeApp
         {
             string ingredient = filterIngredientTextBox.Text;
             List<Recipe> filteredRecipes = recipeManager.GetRecipesSortedByName()
-                .Where(r => r.Ingredients.Any(i => i.Name.Contains(ingredient)))
+                .Where(r => r.Ingredients.Any(i => i.Name.Contains(ingredient, StringComparison.OrdinalIgnoreCase)))
                 .ToList();
 
             if (filteredRecipes.Count > 0)
             {
-                recipesListBox.Items.Clear();
-                foreach (Recipe recipe in filteredRecipes)
-                {
-                    recipesListBox.Items.Add(recipe.Name);
-                }
+                DisplayFilteredRecipes(filteredRecipes);
             }
             else
             {
@@ -233,16 +205,12 @@ namespace RecipeApp
         {
             string foodGroup = filterFoodGroupTextBox.Text;
             List<Recipe> filteredRecipes = recipeManager.GetRecipesSortedByName()
-                .Where(r => r.Ingredients.Any(i => i.FoodGroup == foodGroup))
+                .Where(r => r.Ingredients.Any(i => i.FoodGroup.Equals(foodGroup, StringComparison.OrdinalIgnoreCase)))
                 .ToList();
 
             if (filteredRecipes.Count > 0)
             {
-                recipesListBox.Items.Clear();
-                foreach (Recipe recipe in filteredRecipes)
-                {
-                    recipesListBox.Items.Add(recipe.Name);
-                }
+                DisplayFilteredRecipes(filteredRecipes);
             }
             else
             {
@@ -260,11 +228,7 @@ namespace RecipeApp
 
                 if (filteredRecipes.Count > 0)
                 {
-                    recipesListBox.Items.Clear();
-                    foreach (Recipe recipe in filteredRecipes)
-                    {
-                        recipesListBox.Items.Add(recipe.Name);
-                    }
+                    DisplayFilteredRecipes(filteredRecipes);
                 }
                 else
                 {
@@ -273,27 +237,16 @@ namespace RecipeApp
             }
         }
 
-
-
-
-
-        private void DisplayRecipeDetails(Recipe recipe)
+        private void DisplayFilteredRecipes(List<Recipe> recipes)
         {
-            // Display ingredients
-            ingredientsListBox.Items.Clear();
-            foreach (Ingredient ingredient in recipe.Ingredients)
+            recipesListBox.Items.Clear();
+            foreach (Recipe recipe in recipes)
             {
-                ingredientsListBox.Items.Add(ingredient.Name);
-            }
-
-            // Display steps
-            stepsListBox.Items.Clear();
-            foreach (string step in recipe.Steps)
-            {
-                stepsListBox.Items.Add(step);
+                recipesListBox.Items.Add(recipe.Name);
             }
         }
 
+       
         private void UpdateIngredientsList()
         {
             ingredientsListBox.Items.Clear();
