@@ -1,0 +1,21 @@
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\bin\Debug\net6.0-windows\POE WPF.exe
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\bin\Debug\net6.0-windows\POE WPF.deps.json
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\bin\Debug\net6.0-windows\POE WPF.runtimeconfig.json
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\bin\Debug\net6.0-windows\POE WPF.dll
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\bin\Debug\net6.0-windows\POE WPF.pdb
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\POE WPF.csproj.AssemblyReference.cache
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\POE WPF_MarkupCompile.cache
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\POE WPF.g.resources
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\POE WPF.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\POE WPF.AssemblyInfoInputs.cache
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\POE WPF.AssemblyInfo.cs
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\POE WPF.csproj.CoreCompileInputs.cache
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\POE WPF.dll
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\refint\POE WPF.dll
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\POE WPF.pdb
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\POE WPF.genruntimeconfig.cache
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\ref\POE WPF.dll
+C:\Users\Brendon\source\repos\POE WPF\POE WPF\obj\Debug\net6.0-windows\POE WPF_MarkupCompile.lref
